@@ -255,8 +255,12 @@ func Load() []Fisher {
 }
 
 func main() {
+	rng := rand.New(rand.NewSource(5))
 	iris := Load()
-	cp := LearnEmbeddingIris(iris, 4, 2*1024)
+	rng.Shuffle(len(iris), func(i, j int) {
+		iris[i], iris[j] = iris[j], iris[i]
+	})
+	cp := LearnEmbeddingIris(iris, 4, 512)
 	acc := make(map[string][3]int)
 	for i := range cp {
 		fmt.Println(cp[i].Cluster, cp[i].Label)
