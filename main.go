@@ -94,7 +94,7 @@ func LearnEmbeddingIris(iris []Fisher, size, iterations int) []Fisher {
 		}
 		factor := math.Sqrt(2.0 / float64(w.S[0]))
 		for range cap(w.X) {
-			w.X = append(w.X, rng.NormFloat64()*factor)
+			w.X = append(w.X, rng.NormFloat64()*factor*.01)
 		}
 		w.States = make([][]float64, StateTotal)
 		for ii := range w.States {
